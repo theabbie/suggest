@@ -1,0 +1,32 @@
+{
+  "name": "node-suggest",
+  "version": "1.0.0",
+  "description": "Google, Duckduckgo, Bing, Qwant and other autosuggestion APIs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 'working'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theabbie/suggest.git"
+  },
+  "keywords": [
+    "theabbie",
+    "google",
+    "ddg",
+    "bing",
+    "autocomplete",
+    "autofill",
+    "autosuggest"
+  ],
+  "author": "theabbie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/theabbie/suggest/issues"
+  },
+  "homepage": "https://github.com/theabbie/suggest#readme",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "cheerio": "^1.0.0-rc.3"
+  }
+}
