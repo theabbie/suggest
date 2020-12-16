@@ -1,6 +1,6 @@
 {
   "name": "node-suggest",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Google, Duckduckgo, Bing, Qwant and other autosuggestion APIs",
   "main": "index.js",
   "scripts": {
