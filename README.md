@@ -6,7 +6,7 @@
 
 ## Example
 
-The Following Code snipet will help you understand how to use this.
+The Following Code snippet will help you understand how to use this.
 
 ```js
 var Suggest = require("node-suggest");
