@@ -38,7 +38,7 @@ module.exports = class Suggest {
   }
 
   static async yahoo(q) {
-    var op = await axios(url.yahoo + q);
+    var op = await axios(urls.yahoo + q);
     return op.data.r.map(x=>x.k);
   }
 
@@ -62,5 +62,20 @@ module.exports = class Suggest {
   static async ask(q) {
     var op = await axios(urls.ask + q);
     return op.data[1]
+  }
+
+  static async all(q) {
+    var all = [
+      ...await Suggest.google(q),
+      ...await Suggest.ddg(q),
+      ...await Suggest.bing(q),
+      ...await Suggest.qwant(q),
+      ...await Suggest.yahoo(q),
+      ...await Suggest.startpage(q),
+      ...await Suggest.dogpile(q),
+      ...await Suggest.swisscows(q),
+      ...await Suggest.ask(q)
+    ];
+    return [...new Set(all)];
   }
 }
