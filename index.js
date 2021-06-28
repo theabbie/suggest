@@ -10,7 +10,8 @@ var urls = {
   startpage: "https://www.startpage.com/do/suggest?query=",
   dogpile: "https://www.dogpile.com/suggestions?q=",
   swisscows: "https://swisscows.com/api/suggestion/suggest?query=",
-  ask: "https://amg-ss.ask.com/query?q="
+  ask: "https://amg-ss.ask.com/query?q=",
+  brave: "https://search.brave.com/api/suggest?q=",
 }
 
 module.exports = class Suggest {
@@ -61,7 +62,12 @@ module.exports = class Suggest {
 
   static async ask(q) {
     var op = await axios(urls.ask + q);
-    return op.data[1]
+    return op.data[1];
+  }
+
+  static async brave(q) {
+    var op = await axios(urls.brave + q);
+    return op.data[1];
   }
 
   static async all(q) {
@@ -74,7 +80,8 @@ module.exports = class Suggest {
       ...await Suggest.startpage(q),
       ...await Suggest.dogpile(q),
       ...await Suggest.swisscows(q),
-      ...await Suggest.ask(q)
+      ...await Suggest.ask(q),
+      ...await Suggest.brave(q)
     ];
     return [...new Set(all)];
   }

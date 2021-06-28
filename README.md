@@ -21,6 +21,7 @@ var Suggest = require("node-suggest");
   await Suggest.dogpile("How to");
   await Suggest.swisscows("How to");
   await Suggest.ask("How to");
+  await Suggest.brave("How to");
 })();
 ```
 
@@ -117,6 +118,7 @@ You can contact me on social media, Everything about me can be found [here](http
 * Dogpile
 * Swisscows
 * Ask.com
+* Brave
 
 ## Contact
 
