@@ -12,6 +12,12 @@ var urls = {
   swisscows: "https://swisscows.com/api/suggestion/suggest?query=",
   ask: "https://amg-ss.ask.com/query?q=",
   brave: "https://search.brave.com/api/suggest?q=",
+  // see: https://forum.vivaldi.net/topic/16991/guide-search-suggestion-url
+  ecosia: "https://ac.ecosia.org/autocomplete?q=", // Ecosia API endpoint
+  wikipedia: "https://en.wikipedia.org/w/api.php?action=opensearch&search=",
+  finn: "https://www.finn.no/search/autocomplete/xhr?responseType=json&searchKey=SEARCH_ID_BAP_ALL&term=",
+  // TODO #7
+  //you: "https://you.com/api/ac?q=", // #7: cloudflare
 }
 
 module.exports = class Suggest {
@@ -70,6 +76,26 @@ module.exports = class Suggest {
     return op.data[1];
   }
 
+  static async ecosia(q) {
+    var op = await axios(urls.ecosia + q);
+    return op.data.suggestions;
+  }
+
+  static async wikipedia(q) {
+    var op = await axios(urls.wikipedia + q);
+    return op.data[1]; // [3] has the links
+  }
+
+  static async finn(q) {
+    var op = await axios(urls.finn + q);
+    return op.data.map(x=>x.suggest);
+  }
+
+  //static async you(q) {
+  //  var op = await axios(urls.you + q, options);
+  //  return op.data[1] // FIXME needs cloudflare circumvention
+  //}
+
   static async all(q) {
     var all = [
       ...await Suggest.google(q),
@@ -81,7 +107,11 @@ module.exports = class Suggest {
       ...await Suggest.dogpile(q),
       ...await Suggest.swisscows(q),
       ...await Suggest.ask(q),
-      ...await Suggest.brave(q)
+      ...await Suggest.brave(q),
+      ...await Suggest.ecosia(q),
+      ...await Suggest.wikipedia(q),
+      ...await Suggest.finn(q),
+      //...await Suggest.you(q),
     ];
     return [...new Set(all)];
   }
